@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="demoApp" ng-controller="DemoCtrl">
+    <head>
+        <meta charset="utf-8">
+        <title>angular-steps demo</title>
+        <link rel="stylesheet" href="angular-steps.css">
+        <style>
+
+            .step {
+                width: 300px;
+                height: 300px;
+            }
+            .step1 {
+                background: lightgreen;
+            }
+            .step2 {
+                background: salmon;
+            }
+            .step3 {
+                background: yellow;
+            }
+            .step4 {
+                background: lightblue;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <h1>Currently on step {{stepName}}</h1>
+
+        <p>
+            <button ng-click="gotoLast()">Skip to last</button>
+        </p>
+
+        <steps on-finish="finished()" current-step="stepName">
+            <step class="step1" name="first">
+                <h1>Step 1</h1>
+                <button step-next>Next</button>
+            </step>
+            <step class="step2">
+                <h1>Step 2</h1>
+                <button step-previous>Prev</button>
+                <button step-next>Next</button>
+                <button ng-click="gogo('last')">Go to last</button>
+            </step>
+            <step class="step3">
+                <h1>Step 3</h1>
+                <button step-previous>Prev</button>
+                <button step-next>Next</button>
+                <button ng-click="gogo(0)">Go to 0</button>
+                <button ng-click="gogo(1)">Go to 1</button>
+            </step>
+            <step class="step4" name="last">
+                <h1>Step 4</h1>
+                <button step-previous>Prev</button>
+                <button step-finish>Finish</button>
+                <button ng-click="gogo('first')">Go to first</button>
+            </step>
+        </steps>
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-animate.js"></script>
+        <script src="angular-steps.js"></script>
+        <script>
+            var demoApp = angular.module('demoApp', ['ngAnimate', 'angular-steps']);
+
+            demoApp.controller('DemoCtrl', ['$scope', 'StepsService', function ($scope, StepsService) {
+                $scope.gogo = function (to) {
+                    StepsService.steps().goTo(to);
+                };
+
+                $scope.gotoLast = function () {
+                    $scope.stepName = 'last';
+                };
+
+                $scope.finished = function () {
+                    alert('Aaaand we are done!');
+                };
+            }]);
+        </script>
+    </body>
+</html>
