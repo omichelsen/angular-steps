@@ -1,0 +1,1 @@
+.angular-steps{position:relative}.angular-steps .step{position:absolute;z-index:1}.angular-steps .step.ng-hide{display:block!important;z-index:0}.angular-steps .step.ng-hide-add,.angular-steps .step.ng-hide-remove{transition:all .6s ease-in-out;opacity:1}.angular-steps .step.ng-hide{opacity:0}
