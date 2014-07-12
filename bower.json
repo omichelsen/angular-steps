@@ -10,6 +10,9 @@
         ".gitignore",
         "bower.json",
         "package.json",
-        "README.md"
+        "README.md",
+        "license.md",
+        "demo.html",
+        "gulpfile.js"
     ]
 }
