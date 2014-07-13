@@ -1,0 +1,27 @@
+.angular-steps {
+    position: relative;
+
+    .step {
+        position: absolute;
+        z-index: 1;
+    }
+    .step.ng-hide {
+        display: block !important;
+        z-index: 0;
+    }
+}
+
+/*
+ * Animations (optional) - requires ngAnimate
+ */
+.angular-steps {
+    .step.ng-hide-add,
+    .step.ng-hide-remove {
+        transition: all 0.6s ease-in-out;
+        opacity: 1;
+    }
+
+    .step.ng-hide {
+        opacity: 0;
+    }
+}
