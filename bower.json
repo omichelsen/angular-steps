@@ -13,6 +13,7 @@
         "gulpfile.js",
         "README.md",
         "license.md",
-        "demo/*.*"
+        "demo",
+        "test"
     ]
 }
