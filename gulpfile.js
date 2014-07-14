@@ -3,6 +3,13 @@ var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var karma = require('gulp-karma');
+var rimraf = require('gulp-rimraf');
+
+gulp.task('clean', function () {
+    return gulp.src('dist/**/*', {read: false})
+        .pipe(rimraf());
+});
 
 gulp.task('copy', function () {
     gulp.src('src/*.*')
@@ -31,11 +38,23 @@ gulp.task('css', ['less'], function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('compress', function() {
+gulp.task('compress', function () {
     return gulp.src('src/*.js')
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', ['scss', 'less', 'css', 'copy', 'compress']);
+gulp.task('test', function () {
+    return gulp.src('dist/angular-steps.js')
+        .pipe(karma({
+            configFile: 'karma.conf.js'
+        }))
+        .on('error', function(err) {
+            throw err;
+        });
+});
+
+gulp.task('default', ['clean'], function () {
+    gulp.start('scss', 'less', 'css', 'copy', 'compress', 'test');
+});

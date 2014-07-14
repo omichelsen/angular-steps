@@ -1,15 +1,23 @@
 {
   "name": "angular-steps",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Split your UI into (wizard-like) steps in AngularJS.",
-  "main": "angular-steps.js",
+  "main": "dist/angular-steps.min.js",
   "dependencies": {},
   "devDependencies": {
     "gulp": "^3.8.6",
+    "gulp-karma": "0.0.4",
     "gulp-less": "^1.3.1",
     "gulp-minify-css": "^0.3.6",
     "gulp-rename": "^1.2.0",
-    "gulp-uglify": "^0.3.1"
+    "gulp-rimraf": "^0.1.0",
+    "gulp-uglify": "^0.3.1",
+    "karma": "^0.12.17",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "engines": {
+    "node": ">= 0.9"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
