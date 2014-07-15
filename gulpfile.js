@@ -5,6 +5,8 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var karma = require('gulp-karma');
 var rimraf = require('gulp-rimraf');
+var bump = require('gulp-bump');
+var args = require('yargs').argv;
 
 gulp.task('clean', function () {
     return gulp.src('dist/**/*', {read: false})
@@ -53,6 +55,12 @@ gulp.task('test', function () {
         .on('error', function(err) {
             throw err;
         });
+});
+
+gulp.task('bump', function () {
+    return gulp.src('*.json')
+        .pipe(bump({type: args.type}))
+        .pipe(gulp.dest('.'));
 });
 
 gulp.task('default', ['clean'], function () {
