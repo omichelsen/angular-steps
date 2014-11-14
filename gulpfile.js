@@ -1,12 +1,12 @@
 var gulp = require('gulp');
+var args = require('yargs').argv;
+var bump = require('gulp-bump');
+var del = require('del');
+var karma = require('gulp-karma');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
-var karma = require('gulp-karma');
-var del = require('del');
-var bump = require('gulp-bump');
-var args = require('yargs').argv;
 
 gulp.task('clean', function (cb) {
     del(['dist/**/*'], cb);
