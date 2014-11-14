@@ -94,4 +94,15 @@ describe('AngularSteps', function () {
         expect(flag).toBeTruthy();
         $rootScope.$digest();
     });
+
+    it('should cancel', function () {
+        var scope = $rootScope.$new();
+        var view = createView(scope);
+        StepsService.steps().goTo(2);
+        $rootScope.$digest();
+        expect(scope.referenceCurrentStep).toEqual('More steps');
+        StepsService.steps().cancel();
+        $rootScope.$digest();
+        expect(scope.referenceCurrentStep).toEqual('Starting');
+    });
 });

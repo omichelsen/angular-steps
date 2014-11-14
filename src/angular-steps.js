@@ -110,6 +110,15 @@
                         }
                     };
 
+                    this.previous = function() {
+                        var index = $scope.steps.indexOf($scope.selectedStep);
+                        if (index === 0) {
+                            throw new Error('Already at step 0');
+                        } else {
+                            $scope.goTo($scope.steps[index - 1]);
+                        }
+                    };
+
                     this.goTo = function(step) {
                         var stepTo;
                         if (isNaN(step)) {
@@ -128,13 +137,8 @@
                         }
                     };
 
-                    this.cancel = this.previous = function() {
-                        var index = $scope.steps.indexOf($scope.selectedStep);
-                        if (index === 0) {
-                            throw new Error('Already at step 0');
-                        } else {
-                            $scope.goTo($scope.steps[index - 1]);
-                        }
+                    this.cancel = function() {
+                        $scope.goTo($scope.steps[0]);
                     };
                 }
             ]
