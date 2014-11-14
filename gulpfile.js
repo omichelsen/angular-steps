@@ -2,11 +2,22 @@ var gulp = require('gulp');
 var args = require('yargs').argv;
 var bump = require('gulp-bump');
 var del = require('del');
+var header = require('gulp-header');
 var karma = require('gulp-karma');
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
+var pkg = require('./package.json');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+
+var banner = ['/**',
+    ' * <%= pkg.name %> - <%= pkg.description %>',
+    ' * @version v<%= pkg.version %>',
+    ' * @link <%= pkg.homepage %>',
+    ' * @author <%= pkg.author %>',
+    ' * @license <%= pkg.license %>',
+    ' */',
+    ''].join('\n');
 
 gulp.task('clean', function (cb) {
     del(['dist/**/*'], cb);
@@ -14,6 +25,12 @@ gulp.task('clean', function (cb) {
 
 gulp.task('copy', function () {
     gulp.src('src/*.*')
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('header', ['copy', 'compress'], function () {
+    return gulp.src('dist/*.js')
+        .pipe(header(banner, {pkg: pkg}))
         .pipe(gulp.dest('dist'));
 });
 
@@ -63,5 +80,5 @@ gulp.task('bump', function () {
 });
 
 gulp.task('default', ['clean'], function () {
-    gulp.start('scss', 'less', 'css', 'copy', 'compress', 'test');
+    gulp.start('scss', 'less', 'css', 'copy', 'compress', 'header', 'test');
 });

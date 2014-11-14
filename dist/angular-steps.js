@@ -1,11 +1,11 @@
 /**
- * angular-steps
- * @version v0.2.1 - 2014-11-14
+ * angular-steps - Split your UI into (wizard-like) steps in AngularJS.
+ * @version v0.2.1
  * @link https://github.com/omichelsen/angular-steps
  * @author Ole Michelsen <ole@michelsen.dk>
- * @license MIT License, http://www.opensource.org/licenses/MIT
+ * @license MIT
  */
- (function () {
+(function () {
 
     angular.module('templates-angular-steps', ['step.html', 'steps.html']);
 
