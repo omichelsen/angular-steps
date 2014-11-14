@@ -4,13 +4,12 @@ var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var karma = require('gulp-karma');
-var rimraf = require('gulp-rimraf');
+var del = require('del');
 var bump = require('gulp-bump');
 var args = require('yargs').argv;
 
-gulp.task('clean', function () {
-    return gulp.src('dist/**/*', {read: false})
-        .pipe(rimraf());
+gulp.task('clean', function (cb) {
+    del(['dist/**/*'], cb);
 });
 
 gulp.task('copy', function () {
