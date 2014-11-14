@@ -2,6 +2,8 @@
 
 Wrap your Angular UI logic into a series of steps (pages/slides).
 
+[![Build Status](https://travis-ci.org/omichelsen/angular-steps.svg?branch=master)](https://travis-ci.org/omichelsen/angular-steps)
+
 Demo: http://codepen.io/omichelsen/pen/zkCun
 
 ## Install
