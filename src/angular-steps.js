@@ -1,6 +1,6 @@
 /**
  * angular-steps
- * @version v0.1.0 - 2014-07-10
+ * @version v0.2.1 - 2014-11-14
  * @link https://github.com/omichelsen/angular-steps
  * @author Ole Michelsen <ole@michelsen.dk>
  * @license MIT License, http://www.opensource.org/licenses/MIT
