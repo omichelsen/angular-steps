@@ -1,8 +1,8 @@
-describe( 'AngularSteps', function() {
+describe('AngularSteps', function () {
     var $compile, $rootScope, StepsService;
 
     beforeEach(module('angular-steps'));
-    beforeEach(inject(function(_$compile_, _$rootScope_, _StepsService_) {
+    beforeEach(inject(function (_$compile_, _$rootScope_, _StepsService_) {
         $compile = _$compile_;
         $rootScope = _$rootScope_;
         StepsService = _StepsService_;
@@ -36,7 +36,7 @@ describe( 'AngularSteps', function() {
         return elementCompiled;
     }
 
-    it("should correctly create the steps", function() {
+    it('should correctly create the steps', function () {
         var scope = $rootScope.$new();
         var view = createView(scope);
         expect(StepsService).toBeTruthy();
@@ -45,7 +45,7 @@ describe( 'AngularSteps', function() {
         expect(scope.referenceCurrentStep).toEqual('Starting');
     });
 
-    it( "should go to the next step", function() {
+    it('should go to the next step', function () {
         var scope = $rootScope.$new();
         var view = createView(scope);
         expect(scope.referenceCurrentStep).toEqual('Starting');
@@ -53,7 +53,8 @@ describe( 'AngularSteps', function() {
         $rootScope.$digest();
         expect(scope.referenceCurrentStep).toEqual('Continuing');
     });
-    it( "should return to a previous step", function() {
+
+    it('should return to a previous step', function () {
         var scope = $rootScope.$new();
         var view = createView(scope);
         expect(scope.referenceCurrentStep).toEqual('Starting');
@@ -64,7 +65,8 @@ describe( 'AngularSteps', function() {
         $rootScope.$digest();
         expect(scope.referenceCurrentStep).toEqual('Starting');
     });
-    it( "should go to a step specified by name", function() {
+
+    it('should go to a step specified by name', function () {
         var scope = $rootScope.$new();
         var view = createView(scope);
         expect(scope.referenceCurrentStep).toEqual('Starting');
@@ -72,7 +74,8 @@ describe( 'AngularSteps', function() {
         $rootScope.$digest();
         expect(scope.referenceCurrentStep).toEqual('More steps');
     });
-    it( "should go to a step specified by index", function() {
+
+    it('should go to a step specified by index', function () {
         var scope = $rootScope.$new();
         var view = createView(scope);
         expect(scope.referenceCurrentStep).toEqual('Starting');
@@ -80,10 +83,11 @@ describe( 'AngularSteps', function() {
         $rootScope.$digest();
         expect(scope.referenceCurrentStep).toEqual('More steps');
     });
-    it( "should finish", function() {
+
+    it('should finish', function () {
         var scope = $rootScope.$new();
         var flag = false;
-        scope.finishedSteps = function() { flag = true; };
+        scope.finishedSteps = function () { flag = true; };
         var view = createView(scope);
         expect(scope.referenceCurrentStep).toEqual('Starting');
         StepsService.steps().finish();
