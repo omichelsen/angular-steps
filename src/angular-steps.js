@@ -3,13 +3,13 @@
     angular.module('templates-angular-steps', ['step.html', 'steps.html']);
 
     angular.module('step.html', []).run(['$templateCache',
-        function($templateCache) {
+        function ($templateCache) {
             $templateCache.put('step.html', '<div ng-show=\"selected\" class=\"step ng-hide\" ng-transclude></div>');
         }
     ]);
 
     angular.module('steps.html', []).run(['$templateCache',
-        function($templateCache) {
+        function ($templateCache) {
             $templateCache.put('steps.html',
                 '<div class=\"angular-steps\">\n' +
                 '    <div class=\"steps\" ng-transclude></div>\n' +
@@ -19,7 +19,7 @@
 
     angular.module('angular-steps', ['templates-angular-steps']);
 
-    angular.module('angular-steps').directive('step', function() {
+    angular.module('angular-steps').directive('step', function () {
         return {
             restrict: 'EA',
             replace: true,
@@ -28,16 +28,16 @@
                 name: '@'
             },
             require: '^steps',
-            templateUrl: function(element, attributes) {
+            templateUrl: function (element, attributes) {
                 return attributes.template || 'step.html';
             },
-            link: function($scope, $element, $attrs, steps) {
+            link: function ($scope, $element, $attrs, steps) {
                 steps.addStep($scope);
             }
         };
     });
 
-    angular.module('angular-steps').directive('steps', function() {
+    angular.module('angular-steps').directive('steps', function () {
         return {
             restrict: 'EA',
             replace: true,
@@ -47,20 +47,20 @@
                 onFinish: '&',
                 name: '@'
             },
-            templateUrl: function(element, attributes) {
+            templateUrl: function (element, attributes) {
                 return attributes.template || 'steps.html';
             },
             controller: ['$scope', '$element', 'StepsService',
-                function($scope, $element, StepsService) {
+                function ($scope, $element, StepsService) {
 
                     StepsService.addSteps($scope.name || StepsService.defaultName, this);
-                    $scope.$on('$destroy', function() {
+                    $scope.$on('$destroy', function () {
                         StepsService.removeSteps($scope.name || StepsService.defaultName);
                     });
 
                     $scope.steps = [];
 
-                    $scope.$watch('currentStep', function(step) {
+                    $scope.$watch('currentStep', function (step) {
                         if (!step) return;
                         var stepName = $scope.selectedStep.name;
                         if ($scope.selectedStep && stepName !== $scope.currentStep) {
@@ -71,14 +71,14 @@
                         }
                     });
 
-                    this.addStep = function(step) {
+                    this.addStep = function (step) {
                         $scope.steps.push(step);
                         if ($scope.steps.length === 1) {
                             $scope.goTo($scope.steps[0]);
                         }
                     };
 
-                    $scope.goTo = function(step) {
+                    $scope.goTo = function (step) {
                         unselectAll();
                         $scope.selectedStep = step;
                         if ($scope.currentStep !== void 0) {
@@ -88,13 +88,13 @@
                     };
 
                     function unselectAll() {
-                        $scope.steps.forEach(function(step) {
+                        $scope.steps.forEach(function (step) {
                             step.selected = false;
                         });
                         $scope.selectedStep = null;
                     }
 
-                    this.next = function() {
+                    this.next = function () {
                         var index = $scope.steps.indexOf($scope.selectedStep);
                         if (index === $scope.steps.length - 1) {
                             this.finish();
@@ -103,7 +103,7 @@
                         }
                     };
 
-                    this.previous = function() {
+                    this.previous = function () {
                         var index = $scope.steps.indexOf($scope.selectedStep);
                         if (index === 0) {
                             throw new Error('Already at step 0');
@@ -112,7 +112,7 @@
                         }
                     };
 
-                    this.goTo = function(step) {
+                    this.goTo = function (step) {
                         var stepTo;
                         if (isNaN(step)) {
                             stepTo = $scope.steps.filter(function (elm) {
@@ -124,13 +124,13 @@
                         $scope.goTo(stepTo);
                     };
 
-                    this.finish = function() {
+                    this.finish = function () {
                         if ($scope.onFinish) {
                             $scope.onFinish();
                         }
                     };
 
-                    this.cancel = function() {
+                    this.cancel = function () {
                         $scope.goTo($scope.steps[0]);
                     };
                 }
@@ -140,15 +140,15 @@
 
     function stepsButtonDirective(action) {
         angular.module('angular-steps')
-            .directive(action, function() {
+            .directive(action, function () {
                 return {
                     restrict: 'A',
                     replace: false,
                     require: '^steps',
-                    link: function($scope, $element, $attrs, steps) {
-                        $element.on('click', function(e) {
+                    link: function ($scope, $element, $attrs, steps) {
+                        $element.on('click', function (e) {
                             e.preventDefault();
-                            $scope.$apply(function() {
+                            $scope.$apply(function () {
                                 $scope.$eval($attrs[action]);
                                 steps[action.replace('step', '').toLowerCase()]();
                             });
@@ -163,22 +163,22 @@
     stepsButtonDirective('stepFinish');
     stepsButtonDirective('stepCancel');
 
-    angular.module('angular-steps').factory('StepsService', function() {
+    angular.module('angular-steps').factory('StepsService', function () {
         var service = {};
 
         var instances = {};
 
         service.defaultName = 'default';
 
-        service.addSteps = function(name, steps) {
+        service.addSteps = function (name, steps) {
             instances[name] = steps;
         };
 
-        service.removeSteps = function(name) {
+        service.removeSteps = function (name) {
             delete instances[name];
         };
 
-        service.steps = function(name) {
+        service.steps = function (name) {
             return instances[name || service.defaultName];
         };
 
