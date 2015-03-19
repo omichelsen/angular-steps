@@ -8,6 +8,7 @@ describe('AngularSteps', function () {
         StepsService = _StepsService_;
         scope = $rootScope.$new();
         view = createView(scope);
+        scope.finishedSteps = function () {};
     }));
 
     /**
@@ -52,6 +53,14 @@ describe('AngularSteps', function () {
         expect(scope.referenceCurrentStep).toEqual('Continuing');
     });
 
+    it('should finish if going past last', function () {
+        spyOn(scope, 'finishedSteps');
+        StepsService.steps().goTo(2);
+        StepsService.steps().next();
+        $rootScope.$digest();
+        expect(scope.finishedSteps).toHaveBeenCalled();
+    });
+
     it('should return to a previous step', function () {
         expect(scope.referenceCurrentStep).toEqual('Starting');
         StepsService.steps().next();
@@ -60,6 +69,10 @@ describe('AngularSteps', function () {
         StepsService.steps().previous();
         $rootScope.$digest();
         expect(scope.referenceCurrentStep).toEqual('Starting');
+    });
+
+    it('should throw error trying to go past first', function () {
+        expect(function () { StepsService.steps().previous(); }).toThrow();
     });
 
     it('should go to a step specified by name', function () {
@@ -77,12 +90,10 @@ describe('AngularSteps', function () {
     });
 
     it('should finish', function () {
-        var flag = false;
-        scope.finishedSteps = function () { flag = true; };
+        spyOn(scope, 'finishedSteps');
         expect(scope.referenceCurrentStep).toEqual('Starting');
         StepsService.steps().finish();
-        expect(flag).toBeTruthy();
-        $rootScope.$digest();
+        expect(scope.finishedSteps).toHaveBeenCalled();
     });
 
     it('should cancel', function () {
@@ -92,5 +103,10 @@ describe('AngularSteps', function () {
         StepsService.steps().cancel();
         $rootScope.$digest();
         expect(scope.referenceCurrentStep).toEqual('Starting');
+    });
+
+    it('should cleanup on $destroy', function () {
+        scope.$destroy();
+        expect(StepsService.steps()).toBeUndefined();
     });
 });
