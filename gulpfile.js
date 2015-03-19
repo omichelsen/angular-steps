@@ -3,7 +3,7 @@ var args = require('yargs').argv;
 var bump = require('gulp-bump');
 var del = require('del');
 var header = require('gulp-header');
-var karma = require('gulp-karma');
+var karma = require('karma').server;
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var pkg = require('./package.json');
@@ -63,14 +63,11 @@ gulp.task('compress', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('test', function () {
-    return gulp.src('src/angular-steps.js')
-        .pipe(karma({
-            configFile: 'karma.conf.js'
-        }))
-        .on('error', function(err) {
-            throw err;
-        });
+gulp.task('test', function (done) {
+    karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done);
 });
 
 gulp.task('bump', function () {
