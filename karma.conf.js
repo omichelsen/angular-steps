@@ -1,13 +1,10 @@
-// Karma configuration
-// Generated on Fri Aug 09 2013 14:14:35 GMT-0500 (CDT)
-
 module.exports = function(config) {
   config.set({
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-    frameworks: ["jasmine"],
+    frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -24,7 +21,16 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit'
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+
+    preprocessors: {
+        'dist/*.js': ['coverage']
+    },
+
+    coverageReporter: {
+        type: 'lcov',
+        dir : 'coverage/'
+    },
 
     // web server port
     port: 9876,
