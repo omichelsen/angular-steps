@@ -8,9 +8,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'dist/angular-steps.js',
       'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.js',
       'http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular-mocks.js',
+      'src/angular-steps.js',
       'test/*.js'
     ],
 
@@ -24,7 +24,7 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage'],
 
     preprocessors: {
-        'dist/*.js': ['coverage']
+        'src/*.js': ['coverage']
     },
 
     coverageReporter: {

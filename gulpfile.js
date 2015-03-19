@@ -64,7 +64,7 @@ gulp.task('compress', function () {
 });
 
 gulp.task('test', function () {
-    return gulp.src('dist/angular-steps.js')
+    return gulp.src('src/angular-steps.js')
         .pipe(karma({
             configFile: 'karma.conf.js'
         }))
