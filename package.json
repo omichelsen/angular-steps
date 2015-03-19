@@ -2,7 +2,7 @@
   "name": "angular-steps",
   "version": "0.2.1",
   "description": "Split your UI into (wizard-like) steps in AngularJS.",
-  "main": "dist/angular-steps.min.js",
+  "main": "dist/angular-steps.js",
   "dependencies": {},
   "devDependencies": {
     "del": "^1.1.1",
