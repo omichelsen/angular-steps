@@ -2,7 +2,8 @@
 
 Wrap your Angular UI logic into a series of steps (pages/slides).
 
-[![Build Status](https://travis-ci.org/omichelsen/angular-steps.svg?branch=master)](https://travis-ci.org/omichelsen/angular-steps)
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
 Demo: http://codepen.io/omichelsen/pen/zkCun
 
@@ -171,3 +172,8 @@ This project was inspired by
 [angular-wizard](https://github.com/mgonto/angular-wizard) by
 [@mgonto](https://twitter.com/mgonto). angular-steps is intended to be simpler,
 with a subset of features, smaller footprint and fewer dependencies.
+
+[travis-image]: https://img.shields.io/travis/omichelsen/angular-steps/master.svg
+[travis-url]: https://travis-ci.org/omichelsen/angular-steps
+[coveralls-image]: https://img.shields.io/coveralls/omichelsen/angular-steps/master.svg
+[coveralls-url]: https://coveralls.io/r/omichelsen/angular-steps?branch=master
