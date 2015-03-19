@@ -6,6 +6,7 @@ var header = require('gulp-header');
 var karma = require('karma').server;
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
+var ngAnnotate = require('gulp-ng-annotate');
 var pkg = require('./package.json');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
@@ -28,7 +29,13 @@ gulp.task('copy', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('header', ['copy', 'compress'], function () {
+gulp.task('js', function () {
+    return gulp.src('src/*.js')
+        .pipe(ngAnnotate({single_quotes: true}))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('header', ['compress'], function () {
     return gulp.src('dist/*.js')
         .pipe(header(banner, {pkg: pkg}))
         .pipe(gulp.dest('dist'));
@@ -76,6 +83,6 @@ gulp.task('bump', function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('default', ['clean'], function () {
-    gulp.start('scss', 'less', 'css', 'copy', 'compress', 'header', 'test');
+gulp.task('default', ['clean', 'test'], function () {
+    gulp.start('scss', 'less', 'css', 'copy', 'js', 'compress', 'header');
 });
