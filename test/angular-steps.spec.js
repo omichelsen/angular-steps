@@ -11,11 +11,6 @@ describe('AngularSteps', function () {
         scope.finishedSteps = function () {};
     }));
 
-    /**
-     * Create the view with wizard to test
-     * @param  {Scope} scope         A scope to bind to
-     * @return {[DOM element]}       A DOM element compiled
-     */
     function createView(scope) {
         scope.referenceCurrentStep = null;
         var element = angular.element('<steps on-finish="finishedSteps()" current-step="referenceCurrentStep" ng-init="msg = 14" >'
