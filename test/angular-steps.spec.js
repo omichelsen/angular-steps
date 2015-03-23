@@ -109,4 +109,12 @@ describe('AngularSteps', function () {
         scope.$destroy();
         expect(StepsService.steps()).toBeUndefined();
     });
+
+    it('should change step if currentStep var changes', function () {
+        spyOn(scope, 'finishedSteps');
+        scope.referenceCurrentStep = 'More steps';
+        $rootScope.$digest();
+        StepsService.steps().next();
+        expect(scope.finishedSteps).toHaveBeenCalled();
+    });
 });
