@@ -112,4 +112,12 @@ describe('AngularSteps', function () {
         StepsService.steps().next();
         expect(scope.finishedSteps).toHaveBeenCalled();
     });
+
+    it('should change step on click', function () {
+        var btn = view.find('input')[0];
+        var event = document.createEvent('MouseEvent');
+        event.initMouseEvent('click', true, true);
+        btn.dispatchEvent(event);
+        expect(scope.referenceCurrentStep).toEqual('Continuing');
+    });
 });
