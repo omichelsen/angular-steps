@@ -13,10 +13,14 @@ Demo: http://codepen.io/omichelsen/pen/zkCun
 $ bower install angular-steps --save
 ```
 
-Include the library in your web page:
+Include the style sheet and library in your web page:
 
 ```html
-<script src="bower_components/angular-steps/angular-steps.js"></script>
+<link href="bower_components/angular-steps/dist/angular-steps.css" rel="stylesheet">
+```
+
+```html
+<script src="bower_components/angular-steps/dist/angular-steps.js"></script>
 ```
 
 angular-steps has no other dependencies than [Angular](https://angularjs.org/)
@@ -32,14 +36,15 @@ angular.module('MyApp', ['angular-steps']);
 ```
 
 Start creating some steps around your UI:
+
 ```html
 <steps>
     <step>
-        <h1>Step 1</h2>
+        <h1>Step 1</h1>
         <button step-next>Next</button>
     </step>
     <step>
-        <h1>Step 2</h2>
+        <h1>Step 2</h1>
         <button step-previous>Previous</button>
     </step>
 </steps>
