@@ -9,16 +9,16 @@
 
     angular.module('templates-angular-steps', ['step.html', 'steps.html']);
 
-    angular.module('step.html', []).run(function ($templateCache) {
+    angular.module('step.html', []).run(['$templateCache', function ($templateCache) {
         $templateCache.put('step.html', '<div ng-show=\"selected\" class=\"step ng-hide\" ng-transclude></div>');
-    });
+    }]);
 
-    angular.module('steps.html', []).run(function ($templateCache) {
+    angular.module('steps.html', []).run(['$templateCache', function ($templateCache) {
         $templateCache.put('steps.html',
             '<div class=\"angular-steps\">\n' +
             '    <div class=\"steps\" ng-transclude></div>\n' +
             '</div>');
-    });
+    }]);
 
     angular.module('angular-steps', ['templates-angular-steps']);
 
@@ -53,7 +53,7 @@
             templateUrl: function (element, attributes) {
                 return attributes.template || 'steps.html';
             },
-            controller: function ($scope, $element, StepsService) {
+            controller: ['$scope', '$element', 'StepsService', function ($scope, $element, StepsService) {
 
                 StepsService.addSteps($scope.name || StepsService.defaultName, this);
                 $scope.$on('$destroy', function () {
@@ -135,7 +135,7 @@
                 this.cancel = function () {
                     $scope.goTo($scope.steps[0]);
                 };
-            }
+            }]
         };
     });
 
@@ -181,12 +181,6 @@
 
         service.steps = function (name) {
             return instances[name || service.defaultName];
-        };
-
-        return service;
-    });
-
-})();name || service.defaultName];
         };
 
         return service;
