@@ -3,7 +3,7 @@ var args = require('yargs').argv;
 var bump = require('gulp-bump');
 var del = require('del');
 var header = require('gulp-header');
-var karma = require('karma').server;
+var Server = require('karma').Server;
 var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -20,28 +20,30 @@ var banner = ['/**',
     ' */',
     ''].join('\n');
 
-gulp.task('clean', function (cb) {
-    del(['dist/**/*'], cb);
+gulp.task('clean', function () {
+    return del(['dist/**/*']);
 });
 
-gulp.task('copy', function () {
-    gulp.src('src/*.*')
+gulp.task('copy', ['clean'], function () {
+    gulp.src('src/*.less')
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('js', function () {
+gulp.task('js', ['clean', 'test'], function () {
     return gulp.src('src/*.js')
         .pipe(ngAnnotate({single_quotes: true}))
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('header', ['compress'], function () {
-    return gulp.src('dist/*.js')
         .pipe(header(banner, {pkg: pkg}))
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('scss', function () {
+gulp.task('compress', ['js'], function () {
+    return gulp.src('dist/*.js')
+        .pipe(uglify({preserveComments: 'license'}))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('scss', ['clean'], function () {
     return gulp.src('src/*.less')
         .pipe(rename({
             prefix: '_',
@@ -50,7 +52,7 @@ gulp.task('scss', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('less', function () {
+gulp.task('less', ['clean'], function () {
     return gulp.src('src/*.less')
         .pipe(less())
         .pipe(gulp.dest('dist'));
@@ -63,18 +65,11 @@ gulp.task('css', ['less'], function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('compress', function () {
-    return gulp.src('src/*.js')
-        .pipe(uglify())
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('dist'));
-});
-
 gulp.task('test', function (done) {
-    karma.start({
+    new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
-    }, done);
+    }, done).start();
 });
 
 gulp.task('bump', function () {
@@ -83,6 +78,6 @@ gulp.task('bump', function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('default', ['clean', 'test'], function () {
-    gulp.start('scss', 'less', 'css', 'copy', 'js', 'compress', 'header');
-});
+gulp.task('build', ['scss', 'less', 'css', 'copy', 'js', 'compress']);
+
+gulp.task('default', ['clean', 'test', 'build']);
