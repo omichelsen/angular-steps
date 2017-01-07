@@ -17,7 +17,7 @@
 
     angular.module('angular-steps').directive('step', function () {
         return {
-            restrict: 'EA',
+            restrict: 'E',
             replace: true,
             transclude: true,
             scope: {
@@ -35,7 +35,7 @@
 
     angular.module('angular-steps').directive('steps', function () {
         return {
-            restrict: 'EA',
+            restrict: 'E',
             replace: true,
             transclude: true,
             scope: {

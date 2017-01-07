@@ -1,6 +1,6 @@
 /**
  * angular-steps - Split your UI into (wizard-like) steps in AngularJS.
- * @version v0.3.1
+ * @version v1.0.0
  * @link https://github.com/omichelsen/angular-steps
  * @author Ole Michelsen <ole@michelsen.dk>
  * @license MIT
@@ -24,7 +24,7 @@
 
     angular.module('angular-steps').directive('step', function () {
         return {
-            restrict: 'EA',
+            restrict: 'E',
             replace: true,
             transclude: true,
             scope: {
@@ -42,7 +42,7 @@
 
     angular.module('angular-steps').directive('steps', function () {
         return {
-            restrict: 'EA',
+            restrict: 'E',
             replace: true,
             transclude: true,
             scope: {
