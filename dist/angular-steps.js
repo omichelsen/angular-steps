@@ -1,6 +1,6 @@
 /**
  * angular-steps - Split your UI into (wizard-like) steps in AngularJS.
- * @version v0.2.2
+ * @version v0.3.1
  * @link https://github.com/omichelsen/angular-steps
  * @author Ole Michelsen <ole@michelsen.dk>
  * @license MIT
@@ -54,13 +54,13 @@
                 return attributes.template || 'steps.html';
             },
             controller: ['$scope', '$element', 'StepsService', function ($scope, $element, StepsService) {
-
                 StepsService.addSteps($scope.name || StepsService.defaultName, this);
+
                 $scope.$on('$destroy', function () {
                     StepsService.removeSteps($scope.name || StepsService.defaultName);
                 });
 
-                $scope.steps = [];
+                this.steps = $scope.steps = [];
 
                 $scope.$watch('currentStep', function (step) {
                     if (!step) return;
