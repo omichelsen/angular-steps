@@ -41,6 +41,10 @@ describe('AngularSteps', function () {
         expect(scope.referenceCurrentStep).toEqual('Starting');
     });
 
+    it('should expose steps reference', function () {
+        expect(StepsService.steps().steps.length).toEqual(3);
+    });
+
     it('should go to the next step', function () {
         expect(scope.referenceCurrentStep).toEqual('Starting');
         StepsService.steps().next();

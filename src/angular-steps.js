@@ -47,13 +47,13 @@
                 return attributes.template || 'steps.html';
             },
             controller: function ($scope, $element, StepsService) {
-
                 StepsService.addSteps($scope.name || StepsService.defaultName, this);
+
                 $scope.$on('$destroy', function () {
                     StepsService.removeSteps($scope.name || StepsService.defaultName);
                 });
 
-                $scope.steps = [];
+                this.steps = $scope.steps = [];
 
                 $scope.$watch('currentStep', function (step) {
                     if (!step) return;

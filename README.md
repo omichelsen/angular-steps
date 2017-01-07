@@ -50,7 +50,7 @@ Start creating some steps around your UI:
 </steps>
 ```
 
-The main `<steps>` directive has the following (optional) properties:
+The main `<steps>` directive has the following (optional) attributes:
 
 - **name**: Name of the group of steps. Use if you have multiple `<steps>` to
     reference them in the `ServiceHandler`.
@@ -113,6 +113,8 @@ You can use the following functions on `StepsService.steps()`:
 - **finish()**: Triggers the `on-finish` callback.
 - **goTo(** *number* | *name* **)**: Go to a specific step. Argument can be
     either a number (zero-based index) or the **name** of a step.
+
+You can get the number of steps from `StepsService.steps().steps.length`.
 
 #### Multiple steps
 
