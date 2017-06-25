@@ -1,6 +1,6 @@
 /**
  * angular-steps - Split your UI into (wizard-like) steps in AngularJS.
- * @version v1.0.0
+ * @version v1.0.1
  * @link https://github.com/omichelsen/angular-steps
  * @author Ole Michelsen <ole@michelsen.dk>
  * @license MIT
