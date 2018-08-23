@@ -1,5 +1,7 @@
 # angular-steps
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/omichelsen/angular-steps.svg)](https://greenkeeper.io/)
+
 Wrap your Angular UI logic into a series of steps (pages/slides).
 
 [![Build Status][travis-image]][travis-url]
