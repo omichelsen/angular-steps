@@ -52,6 +52,13 @@ describe('AngularSteps', function () {
         expect(scope.referenceCurrentStep).toEqual('Continuing');
     });
 
+    it('should update selectedIndex', function () {
+        expect(StepsService.steps().selectedIndex()).toEqual(0);
+        StepsService.steps().next();
+        $rootScope.$digest();
+        expect(StepsService.steps().selectedIndex()).toEqual(1);
+    });
+
     it('should finish if going past last', function () {
         spyOn(scope, 'finishedSteps');
         StepsService.steps().goTo(2);

@@ -128,6 +128,10 @@
                 this.cancel = function () {
                     $scope.goTo($scope.steps[0]);
                 };
+
+                this.selectedIndex = function () {
+                    return $scope.steps.indexOf($scope.selectedStep);
+                };
             }
         };
     });

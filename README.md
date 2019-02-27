@@ -113,6 +113,7 @@ You can use the following functions on `StepsService.steps()`:
 - **finish()**: Triggers the `on-finish` callback.
 - **goTo(** *number* | *name* **)**: Go to a specific step. Argument can be
     either a number (zero-based index) or the **name** of a step.
+- **selectedIndex()**: Get current step index.
 
 You can get the number of steps from `StepsService.steps().steps.length`.
 

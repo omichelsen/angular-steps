@@ -1,6 +1,6 @@
 /**
  * angular-steps - Split your UI into (wizard-like) steps in AngularJS.
- * @version v1.0.0
+ * @version v1.1.0
  * @link https://github.com/omichelsen/angular-steps
  * @author Ole Michelsen <ole@michelsen.dk>
  * @license MIT
@@ -134,6 +134,10 @@
 
                 this.cancel = function () {
                     $scope.goTo($scope.steps[0]);
+                };
+
+                this.selectedIndex = function () {
+                    return $scope.steps.indexOf($scope.selectedStep);
                 };
             }]
         };
