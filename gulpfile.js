@@ -5,7 +5,7 @@ var del = require('del');
 var header = require('gulp-header');
 var Server = require('karma').Server;
 var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var ngAnnotate = require('gulp-ng-annotate');
 var pkg = require('./package.json');
 var rename = require('gulp-rename');
@@ -60,7 +60,7 @@ gulp.task('less', ['clean'], function () {
 
 gulp.task('css', ['less'], function () {
     return gulp.src('dist/*.css')
-        .pipe(minifyCSS())
+        .pipe(cleanCSS())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('dist'));
 });
